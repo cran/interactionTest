@@ -50,7 +50,7 @@
 #' @author Justin Esarey and Jane Lawrence Sumner
 #' @references Benjamini, Yoav, and Yosef Hochberg. 1995. "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing." \emph{Journal of the Royal Statistical Society, Series B} 57(1): 289-300.
 #' @references Clark, William R., and Matt Golder. 2006. "Rehabilitating Duverger's Theory." \emph{Comparative Political Studies} 39(6): 679-708.
-#' @references Esarey, Justin, and Jane Lawrence Sumner. 2015. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: http://jee3.web.rice.edu/interaction-overconfidence.pdf.
+#' @references Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: http://jee3.web.rice.edu/interaction-overconfidence.pdf.
 #' @importFrom stats pt qt
 #' @export
 

@@ -27,27 +27,37 @@
 #'   # create bootstrap samples of marginal effects of eneg and logmag on enep1
 #'   # uses the bootFun utility included in this package
 #'   library(boot)
-#'   boot.t.dist <- boot(data = dat, statistic = bootFun, R = 1000, 
-#'             form=enep1 ~ eneg * logmag + uppertier_eneg + uppertier + proximity1 + 
-#'             proximity1_enpres + enpres, fam="gaussian", x.name="eneg", 
-#'             z.name="logmag")$t
-#'   boot.t.x.dist<-boot.t.dist[,1:10]
+#'   # use parallel processing to speed up bootstrapping
+#'   require(snow)
+#'   cl<-makeCluster(3, type="SOCK")               # set up cluster (for 3 cores; 
+#'                                                 # change to match your number of CPUs)
+#'
+#'   clusterSetupRNG(cl, seed=123456)              # set up cluster random number generator with seed
+#'  
+#'   # note: must specify parallel, ncpus, and cl options to use parallelization
+#'   boot.t.dist <- boot(data = dat, statistic = bootFun, R = 10000, 
+#'           form=enep1 ~ eneg * logmag + uppertier_eneg + uppertier + proximity1 + 
+#'           proximity1_enpres + enpres, fam="gaussian", x.name="eneg", 
+#'           z.name="logmag", parallel = "snow", ncpus=3, cl=cl)$t 
+#'           
+#'   stopCluster(cl)
 #'   
+#'   boot.t.x.dist<-boot.t.dist[,1:10]
 #'   
 #'   # calculate critical t-statistic that sets familywise error rate to 10%
 #'   # for statistical significance of marginal effect of of eneg at any value of logmag
-#'   findMultiLims(boot.t.x.dist, type="any", err=0.1)$minimum # answer: 2.593086
+#'   findMultiLims(boot.t.x.dist, type="any", err=0.1)$minimum # answer: 2.698482
 #'  
 #'   # calculate critical t-statistic that sets FWER to 10% for ME of eneg = 0
 #'   # when logmag is small and ME of eneg > 0 when logmag is large
 #'   boot.t.x.dist.lo<-boot.t.dist[,1:5]
 #'   boot.t.x.dist.hi<-boot.t.dist[,6:10]
 #'   findMultiLims(boot.t.x.dist.lo, boot.t.x.dist.hi, type="all", p1=0, 
-#'                   p2=1, err=0.1)$minimum     # answer: 1.008688
+#'                   p2=1, err=0.1)$minimum     # answer: 1.499963
 #' }
 #' @author Justin Esarey and Jane Lawrence Sumner
 #' @references Clark, William R., and Matt Golder. 2006. "Rehabilitating Duverger's Theory." \emph{Comparative Political Studies} 39(6): 679-708.
-#' @references Esarey, Justin, and Jane Lawrence Sumner. 2015. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: http://jee3.web.rice.edu/interaction-overconfidence.pdf.
+#' @references Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: http://jee3.web.rice.edu/interaction-overconfidence.pdf.
 #' @importFrom stats optimize
 #' @export
 
