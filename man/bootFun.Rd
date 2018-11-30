@@ -4,82 +4,14 @@
 \alias{bootFun}
 \title{Bootstrapping t-statistics}
 \usage{
-bootFun(dat, K, form, fam = "gaussian", x.name, z.name)
+bootFun(...)
 }
 \arguments{
-\item{dat}{The data set on which the original model was run}
-
-\item{K}{Index of observations in dat that will be selected for a particular bootstrap run}
-
-\item{form}{The formula for the GLM model}
-
-\item{fam}{The family for the GLM model}
-
-\item{x.name}{The identity of the first interacted variable}
-
-\item{z.name}{the identity of the second interacted variable}
-}
-\value{
-The bootstrap-t statistics from the function for dy/dx and/or dy/dz.
+\item{...}{Any argument to the function (ignored).}
 }
 \description{
-This function is used to create non-parametrically bootstrapped samples of marginal effects
-calculated from a model with interaction. The function takes data, model, an index of observations, 
-and identities of the interacted variables and returns a vector of t-statistics
-corresponding to a single bootstrap deviate for marginal effects in the direction of 
-x.name and z.name.
-}
-\note{
-Form should include x.name*z.name, in that order.
-}
-\examples{
-\dontrun{
- data(legfig)                # Clark and Golder 2006 replication data
-
- set.seed(1231124)
- 
- dat<-subset(legfig, subset=(nineties==1 & old==1))
-
- # create bootstrap samples of marginal effects of eneg and logmag on enep1
- library(boot)
- boot.t.dist <- boot(data = dat, statistic = bootFun, R = 10000, 
-          form=enep1 ~ eneg * logmag + uppertier_eneg + uppertier + proximity1 + 
-          proximity1_enpres + enpres, fam="gaussian", x.name="eneg", 
-          z.name="logmag")$t
- boot.t.x.dist<-boot.t.dist[,1:10]
- 
- # calculate critical t-statistic that sets familywise error rate to 10\%
- # for statistical significance of marginal effect of of eneg at any value of logmag
- findMultiLims(boot.t.x.dist, type="any", err=0.1)$minimum         # answer: 2.698482
- 
- # use parallel processing to speed up bootstrapping
- require(snow)
- cl<-makeCluster(3, type="SOCK")               # set up cluster (for 3 cores; 
-                                               # change to match your number of CPUs)
-
- clusterSetupRNG(cl, seed=123456)              # set up cluster random number generator with seed
- 
- # note: must specify parallel, ncpus, and cl options to use parallelization
- boot.t.dist <- boot(data = dat, statistic = bootFun, R = 10000, 
-          form=enep1 ~ eneg * logmag + uppertier_eneg + uppertier + proximity1 + 
-          proximity1_enpres + enpres, fam="gaussian", x.name="eneg", 
-          z.name="logmag", parallel = "snow", ncpus=3, cl=cl)$t 
-          
- stopCluster(cl)
- 
- boot.t.x.dist<-boot.t.dist[,1:10]
- 
- # calculate critical t-statistic that sets familywise error rate to 10\%
- # for statistical significance of marginal effect of of eneg at any value of logmag
- findMultiLims(boot.t.x.dist, type="any", err=0.1)$minimum         # answer: 2.682705
- 
- }
+This function is defunct.
 }
 \references{
-Clark, William R., and Matt Golder. 2006. "Rehabilitating Duverger's Theory." \emph{Comparative Political Studies} 39(6): 679-708.
-
-Esarey, Justin, and Jane Lawrence Sumner. 2015. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: http://jee3.web.rice.edu/interaction-overconfidence.pdf.
-}
-\author{
-Justin Esarey and Jane Lawrence Sumner
+Esarey, Justin, and Jane Lawrence Sumner. 2018. "Corrigendum to 'Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate.'"
 }

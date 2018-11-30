@@ -66,7 +66,7 @@ Benjamini, Yoav, and Yosef Hochberg. 1995. "Controlling the False Discovery Rate
 
 Clark, William R., and Matt Golder. 2006. "Rehabilitating Duverger's Theory." \emph{Comparative Political Studies} 39(6): 679-708.
 
-Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: http://jee3.web.rice.edu/interaction-overconfidence.pdf.
+Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: <http://justinesarey.com/interaction-overconfidence.pdf>.
 }
 \author{
 Justin Esarey and Jane Lawrence Sumner
