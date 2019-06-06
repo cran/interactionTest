@@ -4,7 +4,7 @@
 \alias{fdrInteraction}
 \title{Critical t-statistic}
 \usage{
-fdrInteraction(me.vec, me.sd.vec, df, level = 0.95)
+fdrInteraction(me.vec, me.sd.vec, df, type = "BH", level = 0.95)
 }
 \arguments{
 \item{me.vec}{A vector of marginal effects.}
@@ -12,6 +12,8 @@ fdrInteraction(me.vec, me.sd.vec, df, level = 0.95)
 \item{me.sd.vec}{A vector of standard deviations for the marginal effects.}
 
 \item{df}{Degrees of freedom.}
+
+\item{type}{Should the BH (Benjamini and Hochberg 1999) or BY (Benjamini and Yekutieli 2000) correction be used? Options are "BH" (the default) or "BY".}
 
 \item{level}{The level of confidence. Defaults to 0.95.}
 }
@@ -64,9 +66,13 @@ legend("topleft", lwd=c(1,2), lty=c(1,2), legend=c("90\% CI", "90\% FDR CI"))
 \references{
 Benjamini, Yoav, and Yosef Hochberg. 1995. "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing." \emph{Journal of the Royal Statistical Society, Series B} 57(1): 289-300.
 
+Benjamini, Yoav, and Daniel Yekutieli. 2001. "The Control of the False Discovery Rate in Multiple Testing Under Dependency." \emph{The Annals of Statistics} 29(4): 1165-1188.
+
 Clark, William R., and Matt Golder. 2006. "Rehabilitating Duverger's Theory." \emph{Comparative Political Studies} 39(6): 679-708.
 
-Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: <http://justinesarey.com/interaction-overconfidence.pdf>.
+Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." \emph{Comparative Political Studies} 51(9): 1144-1176.
+
+Esarey, Justin, and Jane Lawrence Sumner. 2018. "Corrigendum to 'Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate.'"
 }
 \author{
 Justin Esarey and Jane Lawrence Sumner

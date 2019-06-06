@@ -6,6 +6,7 @@
 #' @param me.vec A vector of marginal effects.
 #' @param me.sd.vec A vector of standard deviations for the marginal effects.
 #' @param df Degrees of freedom.
+#' @param type Should the BH (Benjamini and Hochberg 1999) or BY (Benjamini and Yekutieli 2000) correction be used? Options are "BH" (the default) or "BY".
 #' @param level The level of confidence. Defaults to 0.95.
 #'
 #' @examples
@@ -49,20 +50,24 @@
 #' @return The critical t-statistic for the interaction.
 #' @author Justin Esarey and Jane Lawrence Sumner
 #' @references Benjamini, Yoav, and Yosef Hochberg. 1995. "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing." \emph{Journal of the Royal Statistical Society, Series B} 57(1): 289-300.
+#' @references Benjamini, Yoav, and Daniel Yekutieli. 2001. "The Control of the False Discovery Rate in Multiple Testing Under Dependency." \emph{The Annals of Statistics} 29(4): 1165-1188.
 #' @references Clark, William R., and Matt Golder. 2006. "Rehabilitating Duverger's Theory." \emph{Comparative Political Studies} 39(6): 679-708.
-#' @references Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." URL: <http://justinesarey.com/interaction-overconfidence.pdf>.
+#' @references Esarey, Justin, and Jane Lawrence Sumner. 2017. "Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate." \emph{Comparative Political Studies} 51(9): 1144-1176.
+#' @references Esarey, Justin, and Jane Lawrence Sumner. 2018. "Corrigendum to 'Marginal Effects in Interaction Models: Determining and Controlling the False Positive Rate.'"
 #' @importFrom stats pt qt
 #' @export
 
 
-fdrInteraction <- function(me.vec, me.sd.vec, df, level=0.95){
+fdrInteraction <- function(me.vec, me.sd.vec, df, type="BH", level=0.95){
   
   alpha <- (1-level)
   
   t.vals <- (me.vec / me.sd.vec)
   p.vals <- 2*pmin( pt(t.vals, df=df), (1-pt(t.vals, df=df)) )
   
-  multiplier <- (1:length(me.vec)) / length(me.vec)
+  if(type=="BH"){multiplier <- (1:length(me.vec)) / length(me.vec)}
+  if(type=="BY"){multiplier <- ((1:length(me.vec)) / length(me.vec))*(1/sum(1/(1:length(me.vec))))}
+  if(type %in% c("BH","BY")==F){stop("type must be BH or BY")}
   
   o <- order(p.vals)
   

@@ -1,11 +1,11 @@
-e63d30bf250363cc57e339b45b275204 *DESCRIPTION
+90bb13494ecdb31f6c9debf364b4f648 *DESCRIPTION
 1b705564ce937b4cd528ef9a8eaf07d3 *NAMESPACE
 2df8a6ca56b4ac8f495359d01544e241 *R/bootFun.R
-7ca7fda43f3aa1b7913a023bc5b78f96 *R/fdrInteraction.R
+ad9575d21dea2204cb632e4f8ea772f3 *R/fdrInteraction.R
 66afaddf8bfc64ddf0f01e54137ccafc *R/findMultiLims.R
 05f3186a88d9984f9b8067955d0b8cdc *R/legfig.R
 02d6a319deaffe75900b806c9c3a81dc *data/legfig.rda
 48390bab4e39c5d10a6a4e41082cb77d *man/bootFun.Rd
-f8c50804729e705a92f94959ba5726ef *man/fdrInteraction.Rd
+9e12c8007eaa3c12ae1013bb9a24b680 *man/fdrInteraction.Rd
 150c2d67fa977d6f70db557d0c5a84f0 *man/findMultiLims.Rd
 ea9c12872846329d4f547de0f37bfa30 *man/legfig.Rd
